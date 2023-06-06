@@ -3,6 +3,8 @@ import 'package:murni_bus_ticket/models/user.dart';
 import 'package:murni_bus_ticket/models/ticket.dart';
 import 'package:murni_bus_ticket/screens/confirmation_screen.dart';
 import 'package:murni_bus_ticket/services/ticket_service.dart';
+import 'package:intl/intl.dart';
+import 'package:murni_bus_ticket/services/database_service.dart';
 
 class BookingScreen extends StatefulWidget {
   late Ticket ticket; // Change 'final' to 'late' here
@@ -66,11 +68,25 @@ class _BookingScreenState extends State<BookingScreen> {
       _formKey.currentState!.save();
 
       User loggedInUser = widget.user;
+      loggedInUser.firstName = _firstName;
+      loggedInUser.lastName = _lastName;
+
+      var dbService = DatabaseService();
+      bool result = await dbService.updateUser(loggedInUser);
+      if (!result) {
+        print("Failed to update user's first and last name.");
+        // Handle error here
+      }
 
       Ticket newTicket = Ticket(
         bookId: _ticketService.generateBookId(),
         departDate: _selectedDate,
-        time: _selectedTime.format(context),
+        time: DateFormat.Hm().format(DateTime(
+            _selectedDate.year,
+            _selectedDate.month,
+            _selectedDate.day,
+            _selectedTime.hour,
+            _selectedTime.minute)),
         departStation: _departureStation,
         destStation: _destinationStation,
         userId: loggedInUser.userId!,

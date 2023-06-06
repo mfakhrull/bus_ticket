@@ -108,4 +108,21 @@ class DatabaseService {
 
     return null;
   }
+
+  Future<bool> updateUser(User user) async {
+    final db = await this.db;
+    var data = user.toMap();
+    try {
+      await db.update(
+        'user',
+        data,
+        where: 'user_id = ?',
+        whereArgs: [user.userId],
+      );
+      return true;
+    } catch (error) {
+      print('Failed to update user: $error');
+      return false;
+    }
+  }
 }

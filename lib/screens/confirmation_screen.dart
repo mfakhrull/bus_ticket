@@ -33,20 +33,26 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
     );
   }
 
-  void _updateBooking() {
-    Navigator.push(
+  void _updateBooking() async {
+    final updatedTicket = await Navigator.push(
       context,
       MaterialPageRoute(
         builder: (context) => UpdateTicketScreen(
-            ticket: widget.ticket, user: widget.user), // Change here
+          ticket: widget.ticket,
+          user: widget.user,
+        ),
       ),
-    ).then((updatedTicket) {
-      if (updatedTicket != null) {
-        setState(() {
-          widget.ticket = updatedTicket;
-        });
-      }
-    });
+    );
+
+    if (updatedTicket != null) {
+      setState(() {
+        widget.ticket = updatedTicket;
+      });
+
+      // Get the latest updated booking
+      _ticketFuture =
+          _ticketService.getLatestBooking(widget.ticket.userId ?? 0);
+    }
   }
 
   void _cancelBooking() {

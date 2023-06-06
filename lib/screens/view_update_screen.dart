@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:murni_bus_ticket/models/ticket.dart';
 import 'package:murni_bus_ticket/models/user.dart';
 import 'package:murni_bus_ticket/services/ticket_service.dart';
+import 'package:intl/intl.dart';
 
 class UpdateTicketScreen extends StatefulWidget {
   final Ticket ticket;
@@ -27,7 +28,7 @@ class _UpdateTicketScreenState extends State<UpdateTicketScreen> {
     _ticket = widget.ticket;
     _user = widget.user;
     _selectedDate = _ticket.departDate!;
-    _selectedTime = TimeOfDay.fromDateTime(DateTime.parse(_ticket.time!));
+    _selectedTime = parseTimeString(_ticket.time!);
   }
 
   Future<void> _selectDate(BuildContext context) async {
@@ -42,6 +43,12 @@ class _UpdateTicketScreenState extends State<UpdateTicketScreen> {
         _selectedDate = picked;
       });
     }
+  }
+
+  TimeOfDay parseTimeString(String timeString) {
+    final format = DateFormat.Hm(); // for format like "09:57"
+    final dt = format.parse(timeString);
+    return TimeOfDay.fromDateTime(dt);
   }
 
   Future<void> _selectTime(BuildContext context) async {
