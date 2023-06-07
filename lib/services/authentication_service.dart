@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:murni_bus_ticket/models/user.dart';
 import 'package:murni_bus_ticket/services/database_service.dart';
 
@@ -31,5 +32,13 @@ class AuthenticationService {
 
     // If the user doesn't exist or the passwords don't match, return null
     return null;
+  }
+
+  Future<void> logoutUser(BuildContext context) async {
+    // Clear the user session or perform any necessary logout operations
+    // For example, you can delete any stored user data or tokens
+
+    // Navigate to the login screen and reset any relevant state
+    Navigator.pushReplacementNamed(context, '/');
   }
 }

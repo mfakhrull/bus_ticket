@@ -23,16 +23,11 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => LoginScreen(),
         '/register': (context) => RegisterScreen(),
+        '/home': (context) =>
+            HomeScreen(user: User(username: '', password: '')),
       },
       onGenerateRoute: (settings) {
-        if (settings.name == '/home') {
-          final User user = settings.arguments as User;
-          return MaterialPageRoute(
-            builder: (context) {
-              return HomeScreen(user: user);
-            },
-          );
-        } else if (settings.name == '/booking') {
+        if (settings.name == '/booking') {
           final User user = settings.arguments as User;
           return MaterialPageRoute(
             builder: (context) {

@@ -101,7 +101,7 @@ class _BookingScreenState extends State<BookingScreen> {
         MaterialPageRoute(
           builder: (context) => ConfirmationScreen(
             ticket: newTicket,
-            user: widget.user,
+            user: loggedInUser,
           ),
         ),
       );

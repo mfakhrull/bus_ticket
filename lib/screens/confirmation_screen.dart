@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:murni_bus_ticket/models/ticket.dart';
 import 'package:murni_bus_ticket/models/user.dart';
 import 'package:murni_bus_ticket/services/ticket_service.dart';
@@ -6,10 +7,9 @@ import 'package:murni_bus_ticket/screens/view_update_screen.dart';
 
 class ConfirmationScreen extends StatefulWidget {
   late Ticket ticket;
-  late User user; // Add this line
+  late User user;
 
-  ConfirmationScreen(
-      {required this.ticket, required this.user}); // And modify this line
+  ConfirmationScreen({required this.ticket, required this.user});
 
   @override
   _ConfirmationScreenState createState() => _ConfirmationScreenState();
@@ -17,13 +17,6 @@ class ConfirmationScreen extends StatefulWidget {
 
 class _ConfirmationScreenState extends State<ConfirmationScreen> {
   final TicketService _ticketService = TicketService();
-  late Future<Ticket> _ticketFuture;
-
-  @override
-  void initState() {
-    super.initState();
-    _ticketFuture = _ticketService.getLatestBooking(widget.ticket.userId ?? 0);
-  }
 
   void _confirmBooking() {
     ScaffoldMessenger.of(context).showSnackBar(
@@ -48,10 +41,6 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
       setState(() {
         widget.ticket = updatedTicket;
       });
-
-      // Get the latest updated booking
-      _ticketFuture =
-          _ticketService.getLatestBooking(widget.ticket.userId ?? 0);
     }
   }
 
@@ -70,43 +59,50 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
       appBar: AppBar(
         title: Text('Confirmation Screen'),
       ),
-      body: FutureBuilder<Ticket>(
-        future: _ticketFuture,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return Center(
-              child: Column(
-                children: <Widget>[
-                  Text('Confirm your booking'),
-                  Text('Booking ID: ${snapshot.data!.bookId ?? "N/A"}'),
-                  Text(
-                      'Departure Station: ${snapshot.data!.departStation ?? "N/A"}'),
-                  Text(
-                      'Destination Station: ${snapshot.data!.destStation ?? "N/A"}'),
-                  SizedBox(height: 10),
-                  ElevatedButton(
-                    onPressed: _confirmBooking,
-                    child: Text('Confirm Booking'),
-                  ),
-                  SizedBox(height: 10),
-                  ElevatedButton(
-                    onPressed: _cancelBooking,
-                    child: Text('Cancel Booking'),
-                  ),
-                  SizedBox(height: 10),
-                  ElevatedButton(
-                    onPressed: _updateBooking,
-                    child: Text('Update Booking'),
-                  ),
-                ],
-              ),
-            );
-          } else if (snapshot.hasError) {
-            return Text('Error: ${snapshot.error}');
-          } else {
-            return CircularProgressIndicator();
-          }
-        },
+      body: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Text(
+              'Confirm your booking',
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 20),
+            Text(
+              'Booking Details',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            Text('Booking ID: ${widget.ticket.bookId ?? "N/A"}'),
+            Text('Departure Station: ${widget.ticket.departStation ?? "N/A"}'),
+            Text('Destination Station: ${widget.ticket.destStation ?? "N/A"}'),
+            Text(
+                'Departure Date: ${widget.ticket.departDate != null ? DateFormat.yMMMd().format(widget.ticket.departDate!) : "N/A"}'), // New line
+            Text('Departure Time: ${widget.ticket.time ?? "N/A"}'), // New line
+            SizedBox(height: 20),
+            Text(
+              'User Details',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            Text('Name: ${widget.user.firstName} ${widget.user.lastName}'),
+            Text('Phone: ${widget.user.mobileHp}'),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: _confirmBooking,
+              child: Text('Confirm Booking'),
+            ),
+            SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: _cancelBooking,
+              child: Text('Cancel Booking'),
+            ),
+            SizedBox(height: 10),
+            ElevatedButton(
+              onPressed: _updateBooking,
+              child: Text('Update Booking'),
+            ),
+          ],
+        ),
       ),
     );
   }
