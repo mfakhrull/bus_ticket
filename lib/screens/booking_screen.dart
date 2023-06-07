@@ -5,6 +5,7 @@ import 'package:murni_bus_ticket/screens/confirmation_screen.dart';
 import 'package:murni_bus_ticket/services/ticket_service.dart';
 import 'package:intl/intl.dart';
 import 'package:murni_bus_ticket/services/database_service.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class BookingScreen extends StatefulWidget {
   late Ticket ticket; // Change 'final' to 'late' here
@@ -132,9 +133,15 @@ class _BookingScreenState extends State<BookingScreen> {
                 SizedBox(height: 8),
                 InkWell(
                   onTap: () => _selectDate(context),
-                  child: Text(
-                    '${_selectedDate.day}/${_selectedDate.month}/${_selectedDate.year}',
-                    style: TextStyle(fontSize: 16),
+                  child: Row(
+                    children: [
+                      Icon(FontAwesomeIcons.calendarAlt, size: 20),
+                      SizedBox(width: 8),
+                      Text(
+                        '${_selectedDate.day}/${_selectedDate.month}/${_selectedDate.year}',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ],
                   ),
                 ),
                 SizedBox(height: 16),
@@ -148,9 +155,15 @@ class _BookingScreenState extends State<BookingScreen> {
                 SizedBox(height: 8),
                 InkWell(
                   onTap: () => _selectTime(context),
-                  child: Text(
-                    '${_selectedTime.format(context)}',
-                    style: TextStyle(fontSize: 16),
+                  child: Row(
+                    children: [
+                      Icon(FontAwesomeIcons.clock, size: 20),
+                      SizedBox(width: 8),
+                      Text(
+                        '${_selectedTime.format(context)}',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ],
                   ),
                 ),
                 SizedBox(height: 16),
@@ -194,6 +207,7 @@ class _BookingScreenState extends State<BookingScreen> {
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Select Departure Station',
+                    prefixIcon: Icon(FontAwesomeIcons.mapMarkerAlt),
                   ),
                 ),
                 SizedBox(height: 16),
@@ -237,6 +251,7 @@ class _BookingScreenState extends State<BookingScreen> {
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'Select Destination Station',
+                    prefixIcon: Icon(FontAwesomeIcons.mapMarkerAlt),
                   ),
                 ),
                 SizedBox(height: 16),
@@ -255,6 +270,7 @@ class _BookingScreenState extends State<BookingScreen> {
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: 'First',
+                          prefixIcon: Icon(FontAwesomeIcons.user),
                         ),
                         validator: (value) {
                           if (value!.isEmpty) {
@@ -273,6 +289,7 @@ class _BookingScreenState extends State<BookingScreen> {
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: 'Last',
+                          prefixIcon: Icon(FontAwesomeIcons.user),
                         ),
                         validator: (value) {
                           if (value!.isEmpty) {

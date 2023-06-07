@@ -4,6 +4,7 @@ import 'package:murni_bus_ticket/models/ticket.dart';
 import 'package:murni_bus_ticket/models/user.dart';
 import 'package:murni_bus_ticket/services/ticket_service.dart';
 import 'package:murni_bus_ticket/screens/view_update_screen.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ConfirmationScreen extends StatefulWidget {
   late Ticket ticket;
@@ -57,51 +58,83 @@ class _ConfirmationScreenState extends State<ConfirmationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Confirmation Screen'),
+        title: Text('Confirmation Booking'),
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Text(
-              'Confirm your booking',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 20),
-            Text(
-              'Booking Details',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            Text('Booking ID: ${widget.ticket.bookId ?? "N/A"}'),
-            Text('Departure Station: ${widget.ticket.departStation ?? "N/A"}'),
-            Text('Destination Station: ${widget.ticket.destStation ?? "N/A"}'),
-            Text(
-                'Departure Date: ${widget.ticket.departDate != null ? DateFormat.yMMMd().format(widget.ticket.departDate!) : "N/A"}'), // New line
-            Text('Departure Time: ${widget.ticket.time ?? "N/A"}'), // New line
-            SizedBox(height: 20),
-            Text(
-              'User Details',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            Text('Name: ${widget.user.firstName} ${widget.user.lastName}'),
-            Text('Phone: ${widget.user.mobileHp}'),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: _confirmBooking,
-              child: Text('Confirm Booking'),
-            ),
-            SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: _cancelBooking,
-              child: Text('Cancel Booking'),
-            ),
-            SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: _updateBooking,
-              child: Text('Update Booking'),
-            ),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              Text(
+                'Confirm your booking',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 20),
+              Text(
+                'Booking Details',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              ListTile(
+                leading: Icon(FontAwesomeIcons.idCard),
+                title: Text('Booking ID'),
+                subtitle: Text('${widget.ticket.bookId ?? "N/A"}'),
+              ),
+              ListTile(
+                leading: Icon(FontAwesomeIcons.mapMarkerAlt),
+                title: Text('Departure Station'),
+                subtitle: Text('${widget.ticket.departStation ?? "N/A"}'),
+              ),
+              ListTile(
+                leading: Icon(FontAwesomeIcons.mapMarkerAlt),
+                title: Text('Destination Station'),
+                subtitle: Text('${widget.ticket.destStation ?? "N/A"}'),
+              ),
+              ListTile(
+                leading: Icon(FontAwesomeIcons.calendarAlt),
+                title: Text('Departure Date'),
+                subtitle: Text(widget.ticket.departDate != null
+                    ? DateFormat.yMMMd().format(widget.ticket.departDate!)
+                    : 'N/A'),
+              ),
+              ListTile(
+                leading: Icon(FontAwesomeIcons.clock),
+                title: Text('Departure Time'),
+                subtitle: Text('${widget.ticket.time ?? "N/A"}'),
+              ),
+              SizedBox(height: 20),
+              Text(
+                'User Details',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              ),
+              ListTile(
+                leading: Icon(FontAwesomeIcons.user),
+                title: Text('Name'),
+                subtitle:
+                    Text('${widget.user.firstName} ${widget.user.lastName}'),
+              ),
+              ListTile(
+                leading: Icon(FontAwesomeIcons.phone),
+                title: Text('Phone'),
+                subtitle: Text('${widget.user.mobileHp}'),
+              ),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: _confirmBooking,
+                child: Text('Confirm Booking'),
+              ),
+              SizedBox(height: 10),
+              ElevatedButton(
+                onPressed: _cancelBooking,
+                child: Text('Cancel Booking'),
+              ),
+              SizedBox(height: 10),
+              ElevatedButton(
+                onPressed: _updateBooking,
+                child: Text('Update Booking'),
+              ),
+            ],
+          ),
         ),
       ),
     );

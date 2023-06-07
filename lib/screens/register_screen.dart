@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:murni_bus_ticket/services/authentication_service.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class RegisterScreen extends StatefulWidget {
   @override
@@ -10,7 +11,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _formKey = GlobalKey<FormState>();
   String _username = '';
   String _password = '';
-  String _mobileNumber = ''; // Added mobile number field
+  String _mobileNumber = '';
   final AuthenticationService _authService = AuthenticationService();
 
   Future<void> _showErrorSnackbar(String message) async {
@@ -37,6 +38,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               TextFormField(
                 decoration: InputDecoration(
                   labelText: 'Username',
+                  prefixIcon: Icon(FontAwesomeIcons.user),
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -51,6 +53,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               TextFormField(
                 decoration: InputDecoration(
                   labelText: 'Password',
+                  prefixIcon: Icon(FontAwesomeIcons.lock),
                 ),
                 obscureText: true,
                 validator: (value) {
@@ -66,6 +69,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               TextFormField(
                 decoration: InputDecoration(
                   labelText: 'Mobile Number',
+                  prefixIcon: Icon(FontAwesomeIcons.phone),
                 ),
                 keyboardType: TextInputType.phone,
                 validator: (value) {

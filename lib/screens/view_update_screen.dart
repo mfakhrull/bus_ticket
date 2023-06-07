@@ -3,6 +3,7 @@ import 'package:murni_bus_ticket/models/ticket.dart';
 import 'package:murni_bus_ticket/models/user.dart';
 import 'package:murni_bus_ticket/services/ticket_service.dart';
 import 'package:intl/intl.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class UpdateTicketScreen extends StatefulWidget {
   final Ticket ticket;
@@ -100,9 +101,15 @@ class _UpdateTicketScreenState extends State<UpdateTicketScreen> {
                 SizedBox(height: 8),
                 InkWell(
                   onTap: () => _selectDate(context),
-                  child: Text(
-                    '${_selectedDate.day}/${_selectedDate.month}/${_selectedDate.year}',
-                    style: TextStyle(fontSize: 16),
+                  child: Row(
+                    children: [
+                      Icon(FontAwesomeIcons.calendarAlt),
+                      SizedBox(width: 8),
+                      Text(
+                        '${_selectedDate.day}/${_selectedDate.month}/${_selectedDate.year}',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ],
                   ),
                 ),
                 SizedBox(height: 16),
@@ -116,9 +123,15 @@ class _UpdateTicketScreenState extends State<UpdateTicketScreen> {
                 SizedBox(height: 8),
                 InkWell(
                   onTap: () => _selectTime(context),
-                  child: Text(
-                    '${_selectedTime.format(context)}',
-                    style: TextStyle(fontSize: 16),
+                  child: Row(
+                    children: [
+                      Icon(FontAwesomeIcons.clock),
+                      SizedBox(width: 8),
+                      Text(
+                        '${_selectedTime.format(context)}',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ],
                   ),
                 ),
                 SizedBox(height: 16),
@@ -140,23 +153,53 @@ class _UpdateTicketScreenState extends State<UpdateTicketScreen> {
                   items: [
                     DropdownMenuItem(
                       value: 'Kuala Lumpur',
-                      child: Text('Kuala Lumpur'),
+                      child: Row(
+                        children: [
+                          Icon(FontAwesomeIcons.mapMarkerAlt),
+                          SizedBox(width: 8),
+                          Text('Kuala Lumpur'),
+                        ],
+                      ),
                     ),
                     DropdownMenuItem(
                       value: 'Johor Bahru',
-                      child: Text('Johor Bahru'),
+                      child: Row(
+                        children: [
+                          Icon(FontAwesomeIcons.mapMarkerAlt),
+                          SizedBox(width: 8),
+                          Text('Johor Bahru'),
+                        ],
+                      ),
                     ),
                     DropdownMenuItem(
                       value: 'Kota Bahru',
-                      child: Text('Kota Bahru'),
+                      child: Row(
+                        children: [
+                          Icon(FontAwesomeIcons.mapMarkerAlt),
+                          SizedBox(width: 8),
+                          Text('Kota Bahru'),
+                        ],
+                      ),
                     ),
                     DropdownMenuItem(
                       value: 'Alor Setar',
-                      child: Text('Alor Setar'),
+                      child: Row(
+                        children: [
+                          Icon(FontAwesomeIcons.mapMarkerAlt),
+                          SizedBox(width: 8),
+                          Text('Alor Setar'),
+                        ],
+                      ),
                     ),
                     DropdownMenuItem(
                       value: 'Melaka',
-                      child: Text('Melaka'),
+                      child: Row(
+                        children: [
+                          Icon(FontAwesomeIcons.mapMarkerAlt),
+                          SizedBox(width: 8),
+                          Text('Melaka'),
+                        ],
+                      ),
                     ),
                   ],
                   decoration: InputDecoration(
@@ -192,23 +235,53 @@ class _UpdateTicketScreenState extends State<UpdateTicketScreen> {
                   items: [
                     DropdownMenuItem(
                       value: 'Kuala Lumpur',
-                      child: Text('Kuala Lumpur'),
+                      child: Row(
+                        children: [
+                          Icon(FontAwesomeIcons.mapMarkerAlt),
+                          SizedBox(width: 8),
+                          Text('Kuala Lumpur'),
+                        ],
+                      ),
                     ),
                     DropdownMenuItem(
                       value: 'Johor Bahru',
-                      child: Text('Johor Bahru'),
+                      child: Row(
+                        children: [
+                          Icon(FontAwesomeIcons.mapMarkerAlt),
+                          SizedBox(width: 8),
+                          Text('Johor Bahru'),
+                        ],
+                      ),
                     ),
                     DropdownMenuItem(
                       value: 'Kota Bahru',
-                      child: Text('Kota Bahru'),
+                      child: Row(
+                        children: [
+                          Icon(FontAwesomeIcons.mapMarkerAlt),
+                          SizedBox(width: 8),
+                          Text('Kota Bahru'),
+                        ],
+                      ),
                     ),
                     DropdownMenuItem(
                       value: 'Alor Setar',
-                      child: Text('Alor Setar'),
+                      child: Row(
+                        children: [
+                          Icon(FontAwesomeIcons.mapMarkerAlt),
+                          SizedBox(width: 8),
+                          Text('Alor Setar'),
+                        ],
+                      ),
                     ),
                     DropdownMenuItem(
                       value: 'Melaka',
-                      child: Text('Melaka'),
+                      child: Row(
+                        children: [
+                          Icon(FontAwesomeIcons.mapMarkerAlt),
+                          SizedBox(width: 8),
+                          Text('Melaka'),
+                        ],
+                      ),
                     ),
                   ],
                   decoration: InputDecoration(
@@ -242,6 +315,7 @@ class _UpdateTicketScreenState extends State<UpdateTicketScreen> {
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: 'First Name',
+                          prefixIcon: Icon(FontAwesomeIcons.user),
                         ),
                         validator: (value) {
                           if (value!.isEmpty) {
@@ -261,6 +335,7 @@ class _UpdateTicketScreenState extends State<UpdateTicketScreen> {
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: 'Last Name',
+                          prefixIcon: Icon(FontAwesomeIcons.user),
                         ),
                         validator: (value) {
                           if (value!.isEmpty) {

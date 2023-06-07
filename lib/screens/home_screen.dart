@@ -6,6 +6,7 @@ import 'package:murni_bus_ticket/services/authentication_service.dart';
 import 'package:murni_bus_ticket/models/ticket.dart';
 import 'package:murni_bus_ticket/models/user.dart';
 import 'package:murni_bus_ticket/screens/confirmation_screen.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomeScreen extends StatefulWidget {
   final User user;
@@ -50,8 +51,22 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:
-            Text('My Bookings', style: Theme.of(context).textTheme.headline6),
+        title: Row(
+          children: [
+            Icon(
+              FontAwesomeIcons.bus,
+              size: 30,
+            ),
+            SizedBox(width: 10),
+            Text(
+              'My Bookings',
+              style: Theme.of(context)
+                  .textTheme
+                  .headline6
+                  ?.copyWith(color: Colors.white),
+            ),
+          ],
+        ),
         actions: [
           IconButton(
             icon: Icon(Icons.logout),
@@ -109,8 +124,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
                           IconButton(
-                            icon: Icon(Icons.edit,
-                                color: Theme.of(context).primaryColor),
+                            icon: Icon(
+                              Icons.edit,
+                              color: Theme.of(context).primaryColor,
+                            ),
                             onPressed: () {
                               Navigator.push(
                                 context,
@@ -129,7 +146,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             },
                           ),
                           IconButton(
-                            icon: Icon(Icons.delete, color: Colors.red),
+                            icon: Icon(
+                              Icons.delete,
+                              color: Colors.red,
+                            ),
                             onPressed: () => _deleteTicket(ticket.bookId),
                           ),
                         ],
